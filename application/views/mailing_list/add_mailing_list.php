@@ -52,6 +52,13 @@ echo validation_errors();
 	echo form_label('Address', 'address') . ': ';
 	echo form_input($address) . '<br />';
 	
+	$state_code=array(
+	'name' => 'state_code',
+	'id' => 'state_code'
+	);
+	echo form_label('State', 'state_code') . ': ';
+	echo form_input($state_code) . '<br />';
+	
 	$zip_postal=array(
 	'name' => 'zip_postal',
 	'id' => 'zip_postal'
@@ -59,29 +66,64 @@ echo validation_errors();
 	echo form_label('Zip Postal', 'zip_postal') . ': ';
 	echo form_input($zip_postal) . '<br />';
 	
+	$username=array(
+	'name' => 'username',
+	'id' => 'username'
+	);
+	echo form_label('Username', 'username') . ': ';
+	echo form_input($username) . '<br />';
+	
+	$password=array(
+	'name' => 'password',
+	'id' => 'password'
+	);
+	echo form_label('Password', 'password') . ': ';
+	echo form_input($password) . '<br />';
+	
+	$bio=array(
+	'name' => 'bio',
+	'id' => 'bio'
+	);
+	
+	echo form_label('Bio', 'bio') . ': ';
+	echo form_textarea($bio) . '<br />';
+	
+	/*$interests=array(
+	'name' => 'interests',
+	'id' => 'interests'
+	);*/
+	
+	$interests=array(
+	'backpack_cal' => 'Backpack CAlifornia',
+	'cycle_cal' => 'Cycle California',
+	'nature_watch' => 'Nature Watch', 
+	);
+	
+	echo form_label('Interests', 'interests') . ': ';
+	echo form_multiselect($interests) . '<br />';
+	
 	$num_tours1=array(
-	'name' => 'num_tours',
+	'name' => 'num_tours1',
 	'id' => 'num_tours1',
 	'value' => '0',
 	'checked' => TRUE
 	);
 	
 	$num_tours2=array(
-	'name' => 'num_tours',
+	'name' => 'num_tours2',
 	'id' => 'num_tours2',
 	'value' => '1-3'
 	);
 	
 	$num_tours3=array(
-	'name' => 'num_tours',
+	'name' => 'num_tours3',
 	'id' => 'num_tours3',
 	'value' => '4-6'
 	);
 	
-	echo '<fieldset>';
-	echo '<legend>Number of tours</legend>';
+	
 	echo form_label('None', 'num_tours1') . ': ';
-	echo form_radio($num_toursl) . '<br />';
+	echo form_radio($num_tours1) . '<br />';
 	
 	echo form_label('1-3', 'num_tours2') . ': ';
 	echo form_radio($num_tours2) . '<br />';
@@ -89,8 +131,8 @@ echo validation_errors();
 	echo form_label('4-6', 'num_tours3') . ': ';
 	echo form_radio($num_tours3) . '<br />';
 	
-	echo '</fieldset>';
 	
 ?>
 
+<?=form_submit('submit','Add to mailing list');?>
 <?=form_close();?>

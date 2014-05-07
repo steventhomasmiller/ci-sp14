@@ -100,7 +100,7 @@ echo validation_errors();
 	);
 	
 	echo form_label('Interests', 'interests') . ': ';
-	echo form_multiselect($interests) . '<br />';
+	echo form_multiselect('interests',$interests) . '<br />';
 	
 	$num_tours1=array(
 	'name' => 'num_tours1',

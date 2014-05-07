@@ -21,7 +21,7 @@ class Mailing_list extends CI_Controller {
         $this->load->view('header',$data);
         
         
-        $this->load->view('mailing_list/view_mailing_list_detail',$data);
+        $this->load->view('mailing_list/view_mailing_list',$data);
         
         $this->load->view('footer',$data);         //current running object
     }
@@ -31,7 +31,7 @@ class Mailing_list extends CI_Controller {
         $data['query'] = $this->Mailing_list_model->get_id($id);
         
         $data['title'] = "Here is the title tag.";
-        $data['style'] = "cerulean.css";
+        $data['style'] = "amelia.css";
         $data['banner'] = $id;
         $data['copyright'] = "Copyright and such";
         $data['base_url'] = base_url();
@@ -57,17 +57,32 @@ class Mailing_list extends CI_Controller {
         $this->load->view('mailing_list/add_mailing_list',$data);
         
         $this->load->view('footer',$data);         //current running object
-	}
+	}//end add()
 	
 	public function insert()
 	{//will insert the data entered via add()
 		$this->load->model('Mailing_list_model');
 		$this->load->library('form_validation');
-		//$this->load->helper('url');
+		//must have at least one validation rule to insert
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
 		
 		if($this->form_validation->run() == FALSE)
 		{//failed validation; send back to form
-			echo "insert failed!";
+			//VIEW DATA ON FAILURE GOES HERE
+			$this->load->helper('form');
+			$data['title'] = "AHHHHHHH.";
+			$data['style'] = "cerulean.css";
+			$data['banner'] = "Data entry error. Sorry.";
+			$data['copyright'] = "Copyright and such";
+			$data['base_url'] = base_url();
+			$this->load->view('header',$data);
+			
+			$this->load->view('mailing_list/add_mailing_list',$data);
+			
+			$this->load->view('footer',$data);
+
+			
+			//echo "insert failed!";
 		}else{//insert data
 			$post=array(
 				'first_name' => $this->input->post('first_name'),
@@ -80,17 +95,14 @@ class Mailing_list extends CI_Controller {
 				'password' => $this->input->post('password'),
 				'bio' => $this->input->post('bio'),
 				'interests' => $this->input->post('interests'),
-				'num_tours' => $this->input->post('num_tours'),
+				'num_tours' => $this->input->post('num_tours')
 			);
 			
 			$this->Mailing_list_model->insert($post);
 			echo "Data inserted?";
-		
 		}
-		
 	}
 	
-
 }
 
  //classes extend complex code	

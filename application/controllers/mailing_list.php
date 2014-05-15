@@ -48,7 +48,7 @@ class Mailing_list extends CI_Controller {
 	{//is a form to add a new record
 		$this->load->helper('form');
         $data['title'] = "Here is the title tag.";
-        $data['style'] = "cerulean.css";
+        $data['style'] = "amelia.css";
         $data['banner'] = "Add a record, NOW!";
         $data['copyright'] = "Copyright and such";
         $data['base_url'] = base_url();
@@ -77,7 +77,7 @@ class Mailing_list extends CI_Controller {
 			//VIEW DATA ON FAILURE GOES HERE
 			$this->load->helper('form');
 			$data['title'] = "AHHHHHHH.";
-			$data['style'] = "cerulean.css";
+			$data['style'] = "amelia.css";
 			$data['banner'] = "Data entry error. Sorry.";
 			$data['copyright'] = "Copyright and such";
 			$data['base_url'] = base_url();
@@ -101,11 +101,17 @@ class Mailing_list extends CI_Controller {
 				'password' => $this->input->post('password'),
 				'bio' => $this->input->post('bio'),
 				'interests' => $this->input->post('interests'),
-				'num_tours' => $this->input->post('num_tours')
+				'num_tours' => $this->input->post('num_tours'),
 			);
 			
-			$this->Mailing_list_model->insert($post);
-			echo "Data inserted?";
+			$id = $this->Mailing_list_model->insert($post);
+			
+			echo 'id is: ' . $id;
+			die;
+			
+			redirect('/mailing_list/view/' . $id);
+			
+			//echo "Data inserted?";
 		}
 	}
 	

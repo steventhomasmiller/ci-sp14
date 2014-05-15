@@ -70,7 +70,8 @@ class Mailing_list extends CI_Controller {
 		$this->form_validation->set_rules('address','Address','trim|required');
 		$this->form_validation->set_rules('state_code','State','trim|required');
 		$this->form_validation->set_rules('zip_postal','Zip Code','trim|required');
-		$this->form_validation->set_rules('password','Username','trim|required');
+		$this->form_validation->set_rules('username','Username','trim|required');
+		$this->form_validation->set_rules('password','Password','trim|required');
 		
 		if($this->form_validation->run() == FALSE)
 		{//failed validation; send back to form

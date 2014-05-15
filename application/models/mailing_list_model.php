@@ -31,7 +31,7 @@
 	public function insert($row)
 	{
 		$this->db->insert('mailing_list',$row);
-		return this->db->insert_$id();
+		return $this->db->insert_id();
 	}//end insert()
 } 
 

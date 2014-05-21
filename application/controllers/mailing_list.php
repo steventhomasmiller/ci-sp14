@@ -5,42 +5,28 @@ class Mailing_list extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->helper('url');
+		$this->load->model('Mailing_list_model');
 	}
 
 	public function index(){ //We are making data available to our header and footer
-        $this->load->model('Mailing_list_model');
+  
         $data['query'] = $this->Mailing_list_model->get_mailing_list();
-        
-        $data['title'] = "Here is the title tag.";
-        $data['style'] = "amelia.css";
+        $this->config->set_item('style', 'amelia.css');
+		$data['title'] = "Here is the title tag.";
         $data['banner'] = "Here is our website";
         $data['copyright'] = "Copyright and such";
-        $data['base_url'] = base_url();
-        
         $this->load->view('header',$data);
-        
-        
-        $this->load->view('mailing_list/view_mailing_list',$data);
-        
+        $this->load->view('mailing_list/view_mailing_list',$data);       
         $this->load->view('footer',$data);         //current running object
     }
 	
 	public function view($id){ //This will show us the data from a single page
-        $this->load->model('Mailing_list_model');
-        $data['query'] = $this->Mailing_list_model->get_id($id);
-        
+        $data['query'] = $this->Mailing_list_model->get_id($id);        
         $data['title'] = "Here is the title tag.";
-        $data['style'] = "amelia.css";
         $data['banner'] = $id;
-        $data['copyright'] = "Copyright and such";
-        $data['base_url'] = base_url();
-        
+        $data['copyright'] = "Copyright and such";    
         $this->load->view('header',$data);
-        
-        
-        $this->load->view('mailing_list/view_mailing_list_detail',$data);
-        
+        $this->load->view('mailing_list/view_mailing_list_detail',$data);        
         $this->load->view('footer',$data);         //current running object
     } //end view()
 
@@ -48,10 +34,9 @@ class Mailing_list extends CI_Controller {
 	{//is a form to add a new record
 		$this->load->helper('form');
         $data['title'] = "Here is the title tag.";
-        $data['style'] = "amelia.css";
         $data['banner'] = "Add a record, NOW!";
         $data['copyright'] = "Copyright and such";
-        $data['base_url'] = base_url();
+       
 		$this->load->view('header',$data);
         
         $this->load->view('mailing_list/add_mailing_list',$data);
@@ -61,7 +46,6 @@ class Mailing_list extends CI_Controller {
 	
 	public function insert()
 	{//will insert the data entered via add()
-		$this->load->model('Mailing_list_model');
 		$this->load->library('form_validation');
 		//must have at least one validation rule to insert
 		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
@@ -78,10 +62,9 @@ class Mailing_list extends CI_Controller {
 			//VIEW DATA ON FAILURE GOES HERE
 			$this->load->helper('form');
 			$data['title'] = "AHHHHHHH.";
-			$data['style'] = "amelia.css";
 			$data['banner'] = "Data entry error. Sorry.";
 			$data['copyright'] = "Copyright and such";
-			$data['base_url'] = base_url();
+			//$data['base_url'] = base_url();
 			$this->load->view('header',$data);
 			
 			$this->load->view('mailing_list/add_mailing_list',$data);
@@ -108,7 +91,7 @@ class Mailing_list extends CI_Controller {
 			$id = $this->Mailing_list_model->insert($post);
 			
 			echo 'id is: ' . $id;
-			die;
+			//die;
 			
 			redirect('/mailing_list/view/' . $id);
 			
